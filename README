@@ -1,0 +1,9 @@
+gallerify.cgi -- takes a local directory and creates an HTML based thumbnail display
+
+initially very light on options, but future plans include:
+	- specify maximum number of images per page
+	- specify thumbnail size
+	- specify multiple source directories
+	- page colors (currently black on white)
+
+
