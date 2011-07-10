@@ -1,5 +1,6 @@
 #!/bin/bash
 
+apache=/usr/local/apache2
 cgi=gallerify.cgi
 #bin1=
 
@@ -12,7 +13,6 @@ then
 fi
 
 echo "> deploying.."
-# copy the wrapper into apache
-sudo cp -v ${cgi} /usr/local/apache2/cgi-bin/
-sudo chmod -v +x /usr/local/apache2/cgi-bin/${cgi}
+sudo cp -v ${cgi} ${apache}/cgi-bin/
+sudo chmod -v +x ${apache}/cgi-bin/${cgi}
 
