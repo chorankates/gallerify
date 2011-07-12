@@ -14,5 +14,6 @@ fi
 
 echo "> deploying.."
 sudo cp -v ${cgi} ${apache}/cgi-bin/
+sudo cp -v gallerify-default.xml ${apache}/cgi-bin/
 sudo chmod -v +x ${apache}/cgi-bin/${cgi}
 
