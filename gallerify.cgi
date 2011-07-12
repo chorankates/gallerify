@@ -1,6 +1,7 @@
 #!/usr/bin/perl -w
 ## gallerify.cgi -- create thumbnails based on a directory of images
 
+
 use strict;
 use warnings;
 
@@ -10,11 +11,12 @@ use File::Basename;
 use File::Spec;
 use Time::HiRes;
 use XML::Simple;
+use URI::Escape;
 
 my $config_file = $ENV{gallerify_config} // 'gallerify-default.xml';
 
 %CFG::settings = get_xml($config_file); # global settings, stored on disk in XML
-%CFG::parameters; # session settings, received via URL
+#%CFG::parameters; # session settings, received via URL
 
 ## print global headers
 print(
@@ -44,6 +46,9 @@ unless (param()) {
     foreach (@information) {
         print "<li>$_</li>";
     } print ("</ul>");
+
+	## need to have some way to select a dir? or just print available dirs?
+	print "<a href='/cgi-bin/gallerify.cgi?directory=/home/conor/git/ndb/diffs/'>/home/conor/git/ndb/diffs/</a>";
     
 } else {
 	# build the thumbnails page
@@ -98,16 +103,16 @@ sub make_thumbnail_link {
 	# make_thumbnail_link($ffp_of_image, $relative_www_accessible_path) - returns an <a href=""></a> HTML string or 0
 	# example: make_thumbnail_link('/home/conor/git/ndb/diffs/this_is_an_image.jpg', '/ndb/') returns 'NEED TO FINISH THIS EXAMPLE'
 	my ($ffp, $dir_www) = @_;
-	my $fname = Basename($ffp);
+	my $fname = basename($ffp);
 	my $dir_local = $ffp =~ s/$fname//;
 	my $results = 0;
 	
-	my $path_www = $dir_www . $fname;
+	my $path_www = $dir_www . uri_escape($fname);
 	
-	my $x = 30;
-	my $y = 30;
+	my $x = 100;
+	my $y = 100;
 	
-	$results = "<a href='$path_www'><img src='$path_www' height=$y width=$x><br>$fname</a>";
+	$results = "<a href='$path_www'><img src='$path_www' height=$y width=$x><br>$fname</a>\n";
 	
 	return $results;
 }
