@@ -79,7 +79,7 @@ unless (param()) {
 			my @local_links = @links[$i..$i+$links_per_row];
 			print "<tr>";
 			foreach my $link (@local_links) {
-				print "<td>$link</td>";
+				print "<td>$link</td>\n";
 			}
 			print "</tr>";
 		}
@@ -112,7 +112,7 @@ sub make_thumbnail_link {
 	my $x = 100;
 	my $y = 100;
 	
-	$results = "<a href='$path_www'><img src='$path_www' height=$y width=$x><br>$fname</a>\n";
+	$results = "<a href='$path_www'><img src='$path_www' height=$y width=$x><br>$fname</a>";
 	
 	return $results;
 }
